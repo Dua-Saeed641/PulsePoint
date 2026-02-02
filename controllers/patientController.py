@@ -26,7 +26,7 @@ def create_patient(user_id, name, age, gender, contact, address):
         return {"success": False, "message": "Gender must be 'Male', 'Female', or 'Other'"}
 
     # Contact validation
-    if not contact.isdigit() or len(contact) < 8 or len(contact) > 15:
+    if not contact.isdigit() and len(contact)==10:
         return {"success": False, "message": "Invalid contact number"}
 
     patient = Patient(

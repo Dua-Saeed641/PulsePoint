@@ -27,8 +27,13 @@ def create_app():
     # ------------------- Register Blueprints -------------------
     from routes.authRoutes import auth
     from routes.patientRoute import patient_bp
+    from routes.adminRoute import admin_bp
+    from routes.doctorRoute import doctor_bp
     app.register_blueprint(patient_bp)
     app.register_blueprint(auth)
+    app.register_blueprint(admin_bp)
+    app.register_blueprint(doctor_bp)
+
 
     # ------------------- Import Models -------------------
     from models import User  # Import models after db initialization

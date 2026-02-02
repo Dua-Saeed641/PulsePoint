@@ -18,7 +18,7 @@ def register():
     if not user:
         return jsonify({"error": "Registration failed"}), 400
 
-    return jsonify({"message:" , " User registered successfully!"}), 201
+    return jsonify({"message": " User registered successfully!"}), 201
 
 
 @auth.route('/login', methods=['POST'])
@@ -40,3 +40,4 @@ def login():
 def logout():
     logout_user()
     return jsonify({"message": "Logged out successfully!"}), 200
+

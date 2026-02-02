@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 from controllers.patientController import create_patient, get_patient_by_user_id, update_patient
+from controllers.dashboardController import get_patient_dashboard
 
 patient_bp = Blueprint('patient', __name__)
 
@@ -47,29 +48,15 @@ def create_patient_profile():
 
 
 # ------------------- Get Patient Dashboard -------------------
+
 @patient_bp.route('/patient/dashboard', methods=['GET'])
 @login_required
-def dashboard():
+def patient_dashboard():
     if current_user.role != 'patient':
         return jsonify({"error": "Unauthorized access"}), 403
 
-    result = get_patient_by_user_id(current_user.id)
-    if not result['success']:
-        return jsonify({"error": result['message']}), 404
-
-    patient = result['patient']
-    return jsonify({
-        "message": f"Welcome {patient.name}!",
-        "patient": {
-            "id": patient.id,
-            "name": patient.name,
-            "age": patient.age,
-            "gender": patient.gender,
-            "contact": patient.contact,
-            "address": patient.address
-        }
-    }), 200
-
+    data =  get_patient_dashboard(current_user.id)
+    return jsonify(data), 200
 
 # ------------------- Update Patient Info -------------------
 @patient_bp.route('/patient/update', methods=['PUT'])

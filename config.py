@@ -13,3 +13,6 @@ class Config:
 
     # Disable modification tracking to save resources
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    ADMIN_CREATE_EMAIL = os.getenv('ADMIN_CREATE_EMAIL', 'duasaeed641@gmail.com')
+    ADMIN_CREATE_PASSWORD = os.getenv('ADMIN_CREATE_PASSWORD', 'duasaeed')
